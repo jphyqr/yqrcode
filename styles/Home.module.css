@@ -7,6 +7,12 @@
   align-items: center;
 }
 
+.cta {
+  padding: 3;
+  background-color: blue;
+  color: white;
+}
+
 .main {
   padding: 5rem 0;
   flex: 1;
