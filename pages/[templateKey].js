@@ -41,15 +41,35 @@ const TemplatePage = ({ template }) => {
               style={{
                 height: itemHeight,
                 width: itemWidth,
-                backgroundColor: "blue",
+
                 position: "relative",
               }}
             >
-              <QRCode
-                value={`http://www.yqrcode.com/service/user1/${item.key}`}
-                size={90}
-              ></QRCode>
-              {/* <span>{item.emoji}</span> */}
+              <div
+                style={{
+                  position: "absolute",
+                  opacity: 0.5,
+                  bottom: 0,
+                  left: 0,
+                  zIndex: 2,
+                }}
+              >
+                <QRCode
+                  value={`http://yqrcode.com/service/user1/${item.key}`}
+                  size={90}
+                ></QRCode>
+              </div>
+              <span
+                style={{
+                  fontSize: 70,
+                  opacity: 0.8,
+                  position: "absolute",
+                  bottom: 0,
+                  left: 0,
+                }}
+              >
+                {item.emoji}
+              </span>
             </div>
           </Link>
         );
