@@ -16,7 +16,14 @@ export default (req, res) => {
     }
   };
 
-  createTestRecord();
+  try {
+    createTestRecord();
+  } catch (error) {
+    console.log("error with  2", error);
+    res.statusCode = 503;
+    res.json({ error: error });
+    return;
+  }
 
   res.statusCode = 200;
   res.json({ name: "John Doe" });
