@@ -10,6 +10,7 @@ export default (req, res) => {
         test: "test",
       });
     } catch (error) {
+      console.error("error with test", error);
       res.statusCode = 503;
       res.json({ error: error });
     }
