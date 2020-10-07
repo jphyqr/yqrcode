@@ -46,7 +46,7 @@ const TemplatePage = ({ template }) => {
               }}
             >
               <QRCode
-                value={`http://www.yqrcode.com/user1/${item.key}`}
+                value={`http://www.yqrcode.com/services/user1/${item.key}`}
                 size={90}
               ></QRCode>
               {/* <span>{item.emoji}</span> */}
