@@ -19,8 +19,8 @@ export const templates = {
     width: 500,
     backgroundColor: "silver",
     fontColor: "black",
-    itemHeight: 100,
-    itemWidth: 100,
+    itemHeight: 150,
+    itemWidth: 150,
     items: [services.PLUMBING, services.RENOVATIONS, services.GROCERY_DELIVERY],
   },
 

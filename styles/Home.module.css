@@ -87,6 +87,36 @@
   margin-top: 3rem;
 }
 
+.kitchenCard {
+  height: 1000px;
+  background-color: lightgrey;
+  width: 500px;
+  padding: 20px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+.emojiLabel {
+  display: block;
+
+  max-width: 100px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.kitchenService {
+  height: 130px;
+  width: 100px;
+
+  background-color: white;
+  color: black;
+  display: "flex";
+  flex-direction: "column";
+}
+
 .card {
   margin: 1rem;
   flex-basis: 45%;
