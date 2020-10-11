@@ -1,3 +1,137 @@
+.overlayContainer {
+  position: relative;
+  height: 100vmax;
+  width: 100%;
+}
+
+/* .bottomDrawer {
+  position: absolute;
+  height: 400px;
+  width: 90%;
+
+  background-color: yellow;
+  bottom: 0px;
+  left: 0;
+  z-index: 5;
+} */
+
+.listItem {
+  margin-bottom: 5px;
+  padding: 5px 10px 5px 10px;
+  border-radius: 5px;
+  display: grid;
+
+  grid-template-columns: 150px 40px 50px 5px;
+
+  column-gap: 10px;
+
+  width: 100%;
+}
+
+.labelWrapper {
+  width: 100%;
+  text-align: left;
+}
+
+.columnSpacer {
+  width: 10px;
+}
+
+.money {
+  color: green;
+  font-weight: 100;
+}
+
+.listItem:first-child {
+  margin-top: 5px;
+}
+.listItem:nth-child(odd) {
+  background: gainsboro;
+}
+
+.listItem:nth-child(even) {
+  background: lightgray;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.dimmer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vmax;
+  background-color: black;
+  opacity: 0.5;
+}
+
+.overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10;
+
+  background-color: white;
+}
+
+.rotateOnSide {
+  transform: rotateZ(-90deg) translateX(50%);
+}
+
+.formLabel {
+  font-size: 18px;
+  color: blue;
+}
+
+.formDescription {
+  font-size: 14px;
+  color: green;
+}
+.formFieldContainer {
+  display: flex;
+  flex-direction: column;
+  padding: 0px 10px 0px 10px;
+  margin-bottom: 10px;
+}
+
+.horizontalSlider {
+  width: 100%;
+  display: flex;
+
+  background-color: lightgrey;
+  height: 60px;
+  overflow-x: auto;
+  overflow-y: hidden;
+
+  align-items: center;
+}
+
+.sliderBlock {
+  display: flex;
+  padding: 5px;
+
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+  height: 30px;
+  width: auto;
+  background-color: yellow;
+  margin-right: 15px;
+  border-radius: 5px;
+}
+
+.sliderBlock:first-child {
+  margin-left: 5px;
+}
 .container {
   min-height: 100vh;
   padding: 0 0.5rem;
@@ -87,10 +221,41 @@
   margin-top: 3rem;
 }
 
+.legalContainer {
+  position: relative;
+
+  height: 975px;
+  width: 563px;
+  border: 1px solid black;
+}
+
+.masterBed {
+  height: 500px;
+  background-color: black;
+  color: white;
+  width: 500px;
+  padding: 20px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
 .kitchenCard {
-  height: 1000px;
+  height: 500px;
   background-color: lightgrey;
   width: 500px;
+  padding: 20px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+.bathroomCard {
+  height: 600px;
+  background-color: lightblue;
+  width: 300px;
   padding: 20px;
   display: flex;
   flex-direction: row;

@@ -21,7 +21,7 @@ export default function Home() {
         <div className={styles.grid}>
           {Object.keys(templates).map((key, i) => {
             return (
-              <Link href={`/${encodeURIComponent(key)}`}>
+              <Link href={`/template/${encodeURIComponent(key)}`}>
                 <a key={i} className={styles.card}>
                   <h3>{key}</h3>
                   <p>
