@@ -1,11 +1,13 @@
 import { combineReducers } from "redux";
-import { bottomDrawerReducer } from "./bottomDrawerReducer";
+import { productInfoReducer } from "./productInfoReducer";
+import { serviceReducer } from "./serviceReducer";
 
 //import { scrollItemReducer } from "./scrollItemReducer";
 //import { avatarMatchReducer } from "./avatarMatchReducer";
 
 const rootReducer = combineReducers({
-  bottomDrawer: bottomDrawerReducer,
+  productInfo: productInfoReducer,
+  service: serviceReducer,
 });
 
 export default rootReducer;

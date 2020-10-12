@@ -2,12 +2,26 @@ import { services } from "../../../constants/types";
 import ShowComponent from "../../../components/ShowComponent";
 import styles from "../../../styles/Home.module.css";
 import SelectProduct from "../../../components/SelectProduct";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { SELECT_SERVICE } from "../../../reducers/reducerConstants";
 const ServiceForUser = ({ user, service }) => {
   const { fields, products } = service || [];
   console.log({ service });
   console.log({ fields });
   const [_selectedProduct, selectProduct] = useState(null);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const unsub = () => {
+      dispatch({
+        type: SELECT_SERVICE,
+        payload: service,
+      });
+    };
+
+    return unsub();
+  }, [service]);
 
   return (
     <div className={styles.overlayContainer}>

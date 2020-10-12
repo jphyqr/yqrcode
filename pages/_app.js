@@ -7,7 +7,7 @@ import styles from "../styles/Home.module.css";
 import Info from "../components/Info";
 
 export const WrappedApp = ({ Component, ...props }) => {
-  const xShowBottomDrawer = useSelector((state) => state.bottomDrawer.show);
+  const xShowProductInfo = useSelector((state) => state.productInfo.show);
 
   return (
     <div className={styles.overlayContainer}>
@@ -19,12 +19,13 @@ export const WrappedApp = ({ Component, ...props }) => {
             .bottomDrawer {
               position: absolute;
               height: 400px;
-              width: 90%;
-
+              width: 400px;
+              left: 50%;
+              transform: translateX(-50%);
               background-color: yellow;
-              bottom: ${xShowBottomDrawer ? `0px` : `-400px`};
+              top: ${xShowProductInfo ? `400px` : `100vh`};
               transition: 0.3s linear;
-              left: 0;
+
               z-index: 5;
             }
           `}

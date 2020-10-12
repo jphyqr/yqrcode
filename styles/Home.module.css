@@ -1,7 +1,8 @@
 .overlayContainer {
   position: relative;
-  height: 100vmax;
+  height: 100vh;
   width: 100%;
+  overflow-y: hidden;
 }
 
 /* .bottomDrawer {
@@ -42,15 +43,16 @@
   font-weight: 100;
 }
 
-.listItem:first-child {
-  margin-top: 5px;
-}
 .listItem:nth-child(odd) {
   background: gainsboro;
 }
 
 .listItem:nth-child(even) {
   background: lightgray;
+}
+.listItem:first-child {
+  background-color: lightcoral;
+  margin-top: 5px;
 }
 
 .list {
@@ -66,7 +68,7 @@
   width: 100%;
   height: 100vmax;
   background-color: black;
-  opacity: 0.5;
+  opacity: 0.8;
 }
 
 .overlay {
@@ -81,6 +83,17 @@
   border-radius: 10;
 
   background-color: white;
+}
+
+.bigEmoji {
+  font-size: 50px;
+}
+
+.spacedRow {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .rotateOnSide {
