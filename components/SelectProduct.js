@@ -56,7 +56,7 @@ const SelectProduct = ({ products }) => {
               position: absolute;
               top: 50%;
               left: 50%;
-              width: 90vw;
+              width: 90%;
               padding: 20px;
 
               transform: translate(-50%, -50%);

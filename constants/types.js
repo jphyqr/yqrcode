@@ -17,6 +17,21 @@ export const fields = {
   },
 };
 
+export const cities = {
+  REGINA: {
+    label: "Regina, SK",
+    key: "REGINA",
+  },
+  SASKATOON: {
+    label: "Saskatoon, SK",
+    key: "Saskatoon",
+  },
+  EDMONTON: {
+    label: "Edmonton, AB",
+    key: "Edmonton",
+  },
+};
+
 export const services = {
   Drains: {
     emoji: "🚽",

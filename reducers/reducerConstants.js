@@ -2,3 +2,19 @@ export const SHOW_PRODUCT_INFO = "SHOW_PRODUCT_INFO";
 export const CLOSE_PRODUCT_INFO = "CLOSE_PRODUCT_INFO";
 export const SELECT_SERVICE = "SELECT_SERVICE";
 export const CLEAR_SERVICE = "CLEAR_SERVICE";
+
+export const SET_CITY = "SET_CITY";
+export const CLEAR_CITY = "CLEAR_CITY";
+
+export const SET_SCREEN_WIDTH = "SET_SCREEN_WIDTH";
+
+export const CLOSE_MODAL = "CLOSE_MODAL";
+export const SET_MODAL = "SET_MODAL";
+
+export const LOADING_STARTED = "LOADING_STARTED";
+export const LOADING_FINISHED = "LOADING_FINISHED";
+
+export const SELECT_USER = "SELECT_USER";
+export const SELECT_USER_ID = "SELECT_USER_ID";
+
+export const SET_TEMPLATE = "SET_TEMPLATE";

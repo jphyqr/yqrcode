@@ -23,6 +23,17 @@ const ServiceForUser = ({ user, service }) => {
     return unsub();
   }, [service]);
 
+  useEffect(() => {
+    const unsub = () => {
+      dispatch({
+        type: SET_CITY,
+        payload: cities[`${cityKey}`],
+      });
+    };
+
+    return unsub();
+  }, [cityKey]);
+
   return (
     <div className={styles.overlayContainer}>
       {products.length > 0 && !_selectedProduct && (

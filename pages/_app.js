@@ -2,12 +2,23 @@ import "../styles/globals.css";
 import { Provider, useSelector } from "react-redux";
 import { initializeStore } from "../config/store";
 import withRedux from "next-redux-wrapper";
-
+import { createFirestoreInstance } from "redux-firestore";
 import styles from "../styles/Home.module.css";
 import Info from "../components/Info";
-
+import ResponsiveLayout from "../layout/ResponsiveLayout";
+import { ReactReduxFirebaseProvider } from "react-redux-firebase";
+import firebase from "../firebase";
+import Router from "next/dist/client/router";
 export const WrappedApp = ({ Component, ...props }) => {
   const xShowProductInfo = useSelector((state) => state.productInfo.show);
+
+  if (props.router.asPath == "/")
+    return (
+      <div>
+        Landing Page
+        <button onClick={() => Router.push("/print/REGINA")}>Regina</button>
+      </div>
+    );
 
   return (
     <div className={styles.overlayContainer}>
@@ -32,15 +43,31 @@ export const WrappedApp = ({ Component, ...props }) => {
         </style>
       </div>
 
-      <Component {...props} />
+      <ResponsiveLayout>
+        <Component {...props} />
+      </ResponsiveLayout>
     </div>
   );
 };
 
 function MyApp({ pageProps, store, ...otherProps }) {
+  const rrfConfig = {
+    userProfile: "users",
+    useFirestoreForProfile: true, // Firestore for Profile instead of Realtime DB
+  };
+
+  const rrfProps = {
+    firebase,
+    config: rrfConfig,
+    dispatch: store.dispatch,
+    createFirestoreInstance, // <- needed if using firestore
+  };
+
   return (
     <Provider store={store}>
-      <WrappedApp {...otherProps} {...pageProps}></WrappedApp>
+      <ReactReduxFirebaseProvider {...rrfProps}>
+        <WrappedApp {...otherProps} {...pageProps}></WrappedApp>
+      </ReactReduxFirebaseProvider>
     </Provider>
   );
 }
