@@ -21,7 +21,7 @@ const ResponsiveLayout = ({ children }) => {
   const firestore = firebase.firestore();
   const ref = firestore.collection("users");
   const xProfile = useSelector((state) => state.user.profile || {});
-  const [_showUserProfile, setShowUserProfile] = useState(true);
+  const [_showUserProfile, setShowUserProfile] = useState(false);
   const [data, loading, error] = useSubCollection(ref);
   useEffect(() => {
     setUsers(data);
@@ -40,6 +40,7 @@ const ResponsiveLayout = ({ children }) => {
   const auth = useSelector((state) => state.firebase.auth || {});
   const xLoading = useSelector((state) => state.async.loading || false);
   const xLoadingMessage = useSelector((state) => state.async.message || "");
+  const inDev = process.env.NODE_ENV === "development" ? true : false;
   const [_topRightMenu, setTopRightMenu] = useState(false);
   if (typeof window !== "undefined") {
     const [width, setWidth] = useState(window.innerWidth);
@@ -151,52 +152,56 @@ const ResponsiveLayout = ({ children }) => {
       <div className={styles.spacedRow}>
         <span>{xCity?.label || "No City Selected"}</span>
 
-        <select
-          onChange={async (e) => {
-            const userId = e.target.value;
-            console.log("get user for ", userId);
-            try {
-              let userDoc = await firestore
-                .collection("users")
-                .doc(userId)
-                .get();
-              console.log("user doc data", userDoc.data());
+        {inDev && (
+          <select
+            onChange={async (e) => {
+              const userId = e.target.value;
+              console.log("get user for ", userId);
+              try {
+                let userDoc = await firestore
+                  .collection("users")
+                  .doc(userId)
+                  .get();
+                console.log("user doc data", userDoc.data());
 
-              dispatch({
-                type: SELECT_USER,
-                payload: { id: userId, profile: { ...userDoc.data() } },
-              });
-            } catch (error) {
-              console.log("Error changing user", error);
-            }
-          }}
-        >
-          <option>Select User</option>
-          {_users.map((user, i) => {
-            return (
-              <option selected={user.id === xUserId} key={i} value={user.id}>
-                {user.id}
-              </option>
-            );
-          })}
-        </select>
+                dispatch({
+                  type: SELECT_USER,
+                  payload: { id: userId, profile: { ...userDoc.data() } },
+                });
+              } catch (error) {
+                console.log("Error changing user", error);
+              }
+            }}
+          >
+            <option>Select User</option>
+            {_users.map((user, i) => {
+              return (
+                <option selected={user.id === xUserId} key={i} value={user.id}>
+                  {user.id}
+                </option>
+              );
+            })}
+          </select>
+        )}
 
-        <select onChange={(e) => router.push(`/${e.target.value}`)}>
-          <option>Change City</option>
-          {Object.keys(cities).map((city, i) => {
-            return (
-              <option selected={xCity.key === city} key={i} value={city}>
-                {cities[`${city}`].label}
-              </option>
-            );
-          })}
-        </select>
+        {inDev && (
+          <select onChange={(e) => router.push(`/${e.target.value}`)}>
+            <option>Change City</option>
+            {Object.keys(cities).map((city, i) => {
+              return (
+                <option selected={xCity.key === city} key={i} value={city}>
+                  {cities[`${city}`].label}
+                </option>
+              );
+            })}
+          </select>
+        )}
 
         <button onClick={() => setTopRightMenu(true)}>
           {profile?.displayName || "Log In"}
         </button>
       </div>
-
+      )
       <div className="body">
         {_screenType !== SCREEN_TYPE.MOBILE && <aside>ASIDE</aside>}
 
@@ -208,7 +213,6 @@ const ResponsiveLayout = ({ children }) => {
 
         {_screenType !== SCREEN_TYPE.MOBILE && <aside>ASIDE</aside>}
       </div>
-
       <div className={styles.spacedRow}>
         <span>Footer</span>
         <span>Footer</span>
