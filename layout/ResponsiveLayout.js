@@ -179,19 +179,77 @@ const ResponsiveLayout = ({ children, bypassAuth }) => {
         {renderModal()}
 
         <div className={styles.stickyContainer}>
-          <div className={styles.topMenu}>
-            <SettingsMenu
-              top={_screenType === SCREEN_TYPE.MOBILE}
-              closeClick={() => setTopRightMenu(false)}
-              stickyLeft={settingsRef?.current?.offsetLeft + 30}
-            />
-          </div>
+          {_topRightMenu && _screenType === SCREEN_TYPE.MOBILE && (
+            <div className={"top-left-drawer-menu"}>
+              <SettingsMenu
+                top={_screenType === SCREEN_TYPE.MOBILE}
+                closeClick={() => setTopRightMenu(false)}
+                stickyLeft={settingsRef?.current?.offsetLeft + 30}
+              />
+              <style jsx>
+                {`
+                  .top-left-drawer-menu {
+                    height: auto;
+                    width: auto;
+                    position: sticky;
+                    z-index: 30;
+                    top: 0px;
+                    margin-top: -200px;
+                    transform: translateY(-100%);
+                    animation: slidedown 0.5s forwards;
+                    margin-left: ${settingsRef?.current?.offsetLeft + 30}px;
+                  }
+                  @keyframes slidedown {
+                    0% {
+                      transform: translateY(-100%);
+                    }
+
+                    100% {
+                      transform: translateY(0%);
+                    }
+                  }
+                `}
+              </style>
+            </div>
+          )}
+
+          {_topRightMenu && _screenType !== SCREEN_TYPE.MOBILE && (
+            <div className={"bottom-left-drawer-menu"}>
+              <SettingsMenu
+                top={_screenType === SCREEN_TYPE.MOBILE}
+                closeClick={() => setTopRightMenu(false)}
+                stickyLeft={settingsRef?.current?.offsetLeft + 30}
+              />
+              <style jsx>
+                {`
+                  .bottom-left-drawer-menu {
+                    height: auto;
+                    width: auto;
+                    position: sticky;
+                    z-index: 30;
+                    top: ${screen.height - 200}px;
+                    margin-top: -200px;
+                    transform: translateY(100%);
+                    margin-left: ${settingsRef?.current?.offsetLeft + 30}px;
+                    animation: slideup 0.5s forwards;
+                  }
+                  @keyframes slideup {
+                    0% {
+                      transform: translateY(100%);
+                    }
+
+                    100% {
+                      transform: translateY(0%);
+                    }
+                  }
+                `}
+              </style>
+            </div>
+          )}
 
           {_screenType === SCREEN_TYPE.MOBILE && <HorizontalBottomMenu />}
 
           <div className={"headerNav"}>
-            <div className={"topBar"}></div>
-
             <StoryMenu
               onBrainClick={() => setTopRightMenu(true)}
               setRef={settingsRef}
@@ -200,11 +258,7 @@ const ResponsiveLayout = ({ children, bypassAuth }) => {
 
             <style jsx>{`
 
-        .topBar{
-          display:flex;
-          width: 100%;
-          background-color:green;
-        }
+     
 
     
           .headerNav {

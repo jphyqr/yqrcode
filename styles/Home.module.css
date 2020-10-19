@@ -165,14 +165,6 @@
   z-index: 30;
 }
 
-.topMenu {
-  height: auto;
-  width: auto;
-  position: sticky;
-  z-index: 30;
-  top: 50px;
-}
-
 .headerNav {
   position: sticky;
   top: 0;
