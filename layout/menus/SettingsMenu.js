@@ -22,67 +22,102 @@ const SettingsMenu = ({ top, stickyLeft, closeClick }) => {
         left: stickyLeft + 30,
       }}
     >
-      {auth && (
-        <button onClick={() => firebase.auth().signOut()}>Sign Out</button>
-      )}
-      <button onClick={() => router.push("/scripts")}>Scripts</button>
-      {/* <button onClick={() => dispatch({type:SET_MODAL, payload: modalTypes.DisplayNameSet})}>Change Photo</button>       */}
-      <button
-        onClick={() =>
-          dispatch({
-            type: SET_MODAL,
-            payload: modalTypes.DisplayNameSet,
-          })
-        }
-      >
-        Change Name
-      </button>
+      <div className="top-slice">
+        {auth && (
+          <span onClick={() => firebase.auth().signOut()} className="menu-item">
+            <span className="emoji"></span>
+            <span className="label">Sign out</span>
+          </span>
+        )}
 
-      <button
-        onClick={() =>
-          dispatch({
-            type: SET_MODAL,
-            payload: modalTypes.BusinessManager,
-          })
-        }
-      >
-        Businsess Manager
-      </button>
+        <span onClick={() => router.push("/scripts")} className="menu-item">
+          <span className="emoji"></span>
+          <span className="label">Scripts</span>
+        </span>
+        {/* <button onClick={() => dispatch({type:SET_MODAL, payload: modalTypes.DisplayNameSet})}>Change Photo</button>       */}
 
-      <select
-        onChange={(e) =>
-          dispatch({ type: SET_CITY, payload: cities[`${e.target.value}`] })
-        }
-      >
-        {Object.keys(cities).map((city, i) => {
-          return (
-            <option selected={xCity.key === city} key={i} value={city}>
-              {cities[`${city}`].label}
-            </option>
-          );
-        })}
-      </select>
-      <button onClick={closeClick}>Close</button>
+        <span
+          onClick={() =>
+            dispatch({
+              type: SET_MODAL,
+              payload: modalTypes.DisplayNameSet,
+            })
+          }
+          className="menu-item"
+        >
+          <span className="emoji"></span>
+          <span className="label">Change Name</span>
+        </span>
+
+        <span
+          onClick={() =>
+            dispatch({
+              type: SET_MODAL,
+              payload: modalTypes.BusinessManager,
+            })
+          }
+          className="menu-item"
+        >
+          <span className="emoji"></span>
+          <span className="label">Business</span>
+        </span>
+
+        <select
+          onChange={(e) =>
+            dispatch({ type: SET_CITY, payload: cities[`${e.target.value}`] })
+          }
+        >
+          {Object.keys(cities).map((city, i) => {
+            return (
+              <option selected={xCity.key === city} key={i} value={city}>
+                {cities[`${city}`].label}
+              </option>
+            );
+          })}
+        </select>
+      </div>
+
+      <span onClick={closeClick} className="menu-item">
+        <span className="emoji"></span>
+        <span className="label">Close</span>
+      </span>
+
       <style jsx>
         {`
-          .top-container {
-            background-color: lightgray;
+          .menu-item,
+          select {
+            display: flex;
+            border: 1px solid grey;
+            width: 100%;
+            border-radius: 5px;
+            padding: 5px 10px 5px 10px;
+            margin-bottom: 5px;
+          }
 
-            height: 200px;
-            width: 100px;
-            animation: appear 0.5s forwards;
+          .menu-item:hover {
+            cursor: pointer;
+            color: blue;
+          }
+
+          .top-container,
+          .bottom-container {
+            background-color: gainsboro;
+            border-radius: 10px;
+            height: 300px;
+            width: 150px;
             opacity: 0;
-            z-index: 8;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 10px;
+          }
+
+          .top-container {
+            animation: appear 0.5s forwards;
           }
 
           .bottom-container {
-            background-color: lightgray;
-
-            height: 200px;
-            width: 100px;
-            opacity: 0;
             animation: appear 0.5s forwards;
-            z-index: 8;
           }
 
           @keyframes appear {

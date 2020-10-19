@@ -1,17 +1,24 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { categories } from "../../constants/types";
+import { SET_CATEGORY } from "../../reducers/reducerConstants";
 
-const HorizontalBottomMenu = ({ selectedTab, selectTab }) => {
+const HorizontalBottomMenu = () => {
+  const dispatch = useDispatch();
+  const xCategory = useSelector((state) => state.category || {});
+
   return (
     <div className={"bottom-nav"}>
       {categories.map((categorie, i) => {
         console.log({ categorie });
         return (
           <div
-            onClick={() => selectTab(categorie.key)}
+            onClick={() =>
+              dispatch({ type: SET_CATEGORY, payload: categorie.key })
+            }
             key={i}
             className={`nav-item ${
-              selectedTab === categorie.key ? " selected-tab" : ""
+              xCategory === categorie.key ? " selected-tab" : ""
             }`}
           >
             {categorie.emojie}
@@ -34,7 +41,7 @@ const HorizontalBottomMenu = ({ selectedTab, selectTab }) => {
 
           background-color: darkgrey;
 
-          z-index: 10;
+          z-index: 2;
           height: 55px;
           align-items: center;
         }

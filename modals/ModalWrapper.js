@@ -38,11 +38,12 @@ const ModalWrapper = ({ children }) => {
         
         }
         .modal-container {
-          width: 100%;
+          width: 100vw;
           position: absolute;
           left: 0;
           top: 0;
           height: 100%;
+       
       
           z-index: 10;
          

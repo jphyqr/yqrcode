@@ -1,5 +1,4 @@
 .modal {
-  z-index: 30;
   opacity: 0;
   animation: modalAppear 0.5s forwards;
 }
@@ -65,17 +64,6 @@
     transform: rotate(360deg);
   }
 }
-
-/* .bottomDrawer {
-  position: absolute;
-  height: 400px;
-  width: 90%;
-
-  background-color: yellow;
-  bottom: 0px;
-  left: 0;
-  z-index: 5;
-} */
 
 .listItem {
   margin-bottom: 5px;
@@ -156,13 +144,11 @@
   display: flex;
   flex-direction: column;
   border-radius: 10px;
-  z-index: 5;
 }
 .menuContainer {
   height: 100%;
   width: 100%;
   position: relative;
-  z-index: 30;
 }
 
 .headerNav {
@@ -281,7 +267,7 @@
   margin-bottom: 100px;
 }
 .feedCard:first-child {
-  margin-top: 100px;
+  margin-top: 10px;
 }
 
 .feedCard:hover {

@@ -31,7 +31,7 @@ const StoryMenu = ({ mobile, setTopRightMenu, setRef, onBrainClick }) => {
 
           background-color: white;
 
-          z-index: 10;
+          z-index: 2;
           height: 35px;
           align-items: center;
         }

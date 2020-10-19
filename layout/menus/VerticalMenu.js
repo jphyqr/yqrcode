@@ -38,7 +38,7 @@ const VerticalMenu = ({ onBrainClick, setRef, selectedTab, selectTab }) => {
 
           flex-direction: column;
 
-          z-index: 10;
+          z-index: 2;
           height: 93vh;
           width: 100%;
           align-items: flex-end;
