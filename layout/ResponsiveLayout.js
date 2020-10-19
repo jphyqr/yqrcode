@@ -130,6 +130,19 @@ const ResponsiveLayout = ({ children, bypassAuth }) => {
     renderModal();
   }, [xModal]);
 
+  const [scrolling, setScrolling] = useState(false);
+  const [scrollTop, setScrollTop] = useState(0);
+  useEffect(() => {
+    const onScroll = (e) => {
+      console.log("SCROLLING UE");
+      setScrollTop(e.target.documentElement.scrollTop);
+      setScrolling(e.target.documentElement.scrollTop > scrollTop);
+    };
+    window.addEventListener("scroll", onScroll);
+
+    return () => window.removeEventListener("scroll", onScroll);
+  }, [scrollTop]);
+
   useEffect(() => {
     if (auth.isLoaded && !auth.isEmpty)
       dispatch({ type: SET_MODAL, payload: {} });
@@ -174,7 +187,10 @@ const ResponsiveLayout = ({ children, bypassAuth }) => {
     dispatch({ type: SET_MODAL, payload: modalTypes.PhoneNumberModal });
 
   return (
-    <div className={styles.menuContainer}>
+    <div
+      onScroll={() => console.log("SCROLLING")}
+      className={styles.menuContainer}
+    >
       <div className={styles.modalContainer}>
         {renderModal()}
 
@@ -278,7 +294,10 @@ const ResponsiveLayout = ({ children, bypassAuth }) => {
           }
         `}</style>
           </div>
-          <div className={styles.topContainer}>
+          <div
+            onScroll={() => console.log("SCROLL 2")}
+            className={styles.topContainer}
+          >
             {_showUserProfile && (
               <div className={styles.bottomRightCard}>
                 <span>{xUserId || "No Id"}</span>
@@ -298,7 +317,7 @@ const ResponsiveLayout = ({ children, bypassAuth }) => {
                 </div>
               </aside>
             )}
-            <div className="main">
+            <div className="main" onScroll={() => console.log("SCROLLING")}>
               {xLoading && xLoadingMessage && (
                 <Loader message={xLoadingMessage} />
               )}
