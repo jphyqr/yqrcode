@@ -12,41 +12,33 @@ import Router from "next/dist/client/router";
 export const WrappedApp = ({ Component, ...props }) => {
   const xShowProductInfo = useSelector((state) => state.productInfo.show);
 
-  if (props.router.asPath == "/")
-    return (
-      <div>
-        Landing Page
-        <button onClick={() => Router.push("/print/REGINA")}>Regina</button>
-      </div>
-    );
+  // return (
+  //   <div className="test">
+  //     <div className="sticky">TEST</div>
+  //     <style jsx>
+  //       {`
+  //         .test {
+  //           background-color: red;
+  //           height: 1000px;
+  //         }
+  //         .sticky {
+  //           background-color: green;
+  //           position: sticky;
+  //           top: 0px;
+  //         }
+  //       `}
+  //     </style>
+  //   </div>
+  // );
+
+  // if (props.router.asPath == "/") return <Component {...props} />;
 
   return (
-    <div className={styles.overlayContainer}>
-      <div className="bottomDrawer">
-        <Info />
-
-        <style jsx>
-          {`
-            .bottomDrawer {
-              position: absolute;
-              height: 400px;
-              width: 400px;
-              left: 50%;
-              transform: translateX(-50%);
-              background-color: yellow;
-              top: ${xShowProductInfo ? `400px` : `100vh`};
-              transition: 0.3s linear;
-
-              z-index: 5;
-            }
-          `}
-        </style>
-      </div>
-
-      <ResponsiveLayout>
-        <Component {...props} />
-      </ResponsiveLayout>
-    </div>
+    <ResponsiveLayout
+      bypassAuth={props.router.asPath == "/landingpage" ? true : false}
+    >
+      <Component {...props} />
+    </ResponsiveLayout>
   );
 };
 

@@ -18,3 +18,4 @@ export const SELECT_USER = "SELECT_USER";
 export const SELECT_USER_ID = "SELECT_USER_ID";
 
 export const SET_TEMPLATE = "SET_TEMPLATE";
+export const SET_CATEGORY = "SET_CATEGORY";

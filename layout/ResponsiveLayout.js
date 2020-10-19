@@ -1,21 +1,31 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import styles from "../styles/Home.module.css";
 import { useSelector, useDispatch } from "react-redux";
 import { useRouter } from "next/dist/client/router";
-import { cities } from "../constants/types";
+import { categories, cities } from "../constants/types";
 import {
   SET_SCREEN_WIDTH,
   SELECT_USER,
   SELECT_USER_ID,
   SET_MODAL,
+  SET_CITY,
 } from "../reducers/reducerConstants";
 import { SCREEN_WIDTH_MIN, SCREEN_TYPE } from "../constants/helperConstants";
 import _ from "lodash";
 import firebase from "../firebase";
-import { modalComponents, modalTypes } from "../constants/modalConstants";
+import {
+  modalComponents,
+  modalTypes,
+  verificationMap,
+} from "../constants/modalConstants";
 import Loader from "../components/Loader";
 import { useSubCollection } from "../hooks/firestoreHooks";
-const ResponsiveLayout = ({ children }) => {
+import HorizontalBottomMenu from "./menus/HorizontalBottomMenu";
+import VerticalMenu from "./menus/VerticalMenu";
+import Fridge from "../components/magnets/Fridge";
+import StoryMenu from "./menus/StoryMenu";
+import SettingsMenu from "./menus/SettingsMenu";
+const ResponsiveLayout = ({ children, bypassAuth }) => {
   const [_f, f] = useState(1);
   const [_users, setUsers] = useState([]);
   const firestore = firebase.firestore();
@@ -42,6 +52,8 @@ const ResponsiveLayout = ({ children }) => {
   const xLoadingMessage = useSelector((state) => state.async.message || "");
   const inDev = process.env.NODE_ENV === "development" ? true : false;
   const [_topRightMenu, setTopRightMenu] = useState(false);
+
+  const settingsRef = useRef(null);
   if (typeof window !== "undefined") {
     const [width, setWidth] = useState(window.innerWidth);
 
@@ -127,120 +139,163 @@ const ResponsiveLayout = ({ children }) => {
     }
   }, [auth]);
 
-  if (auth.isLoaded && auth.isEmpty)
+  const [, profileChanged] = useState(false);
+
+  useEffect(() => {
+    profileChanged(true);
+    const showNextVerification = () => {
+      console.log("show verification map", verificationMap);
+      if (profile.isLoaded && !profile.isEmpty) {
+        Object.keys(verificationMap).map((modal) => {
+          if (!profile[`${modal}`]) {
+            dispatch({
+              type: SET_MODAL,
+              payload: modal,
+            });
+          } else {
+            dispatch({
+              type: SET_MODAL,
+              payload: {},
+            });
+          }
+        });
+      }
+    };
+
+    showNextVerification();
+  }, [profile]);
+
+  useEffect(() => {
+    if (auth.isLoaded && auth.isEmpty && bypassAuth)
+      dispatch({ type: SET_MODAL, payload: {} });
+  }, [bypassAuth]);
+
+  if (auth.isLoaded && auth.isEmpty && !bypassAuth)
     dispatch({ type: SET_MODAL, payload: modalTypes.PhoneNumberModal });
 
   return (
-    <div className={styles.spacedPage}>
-      {_showUserProfile && (
-        <div className={styles.bottomRightCard}>
-          <span>{xUserId || "No Id"}</span>
-          {Object.keys(xProfile).map((key, i) => {
-            return <span key={i}>{`${key}:${xProfile[`${key}`]}`}</span>;
-          })}
-        </div>
-      )}
-      {_topRightMenu && (
-        <div className={styles.topRightMenu}>
-          {auth && (
-            <button onClick={() => firebase.auth().signOut()}>Sign Out</button>
-          )}
-          <button onClick={() => router.push("/scripts")}>Scripts</button>
-          <button onClick={() => setTopRightMenu(false)}>Close</button>
-        </div>
-      )}
-      <div className={styles.spacedRow}>
-        <span>{xCity?.label || "No City Selected"}</span>
+    <div className={styles.menuContainer}>
+      <div className={styles.modalContainer}>
+        {renderModal()}
 
-        {inDev && (
-          <select
-            onChange={async (e) => {
-              const userId = e.target.value;
-              console.log("get user for ", userId);
-              try {
-                let userDoc = await firestore
-                  .collection("users")
-                  .doc(userId)
-                  .get();
-                console.log("user doc data", userDoc.data());
+        <div className={styles.stickyContainer}>
+          <div className={styles.topMenu}>
+            <SettingsMenu
+              top={_screenType === SCREEN_TYPE.MOBILE}
+              closeClick={() => setTopRightMenu(false)}
+              stickyLeft={settingsRef?.current?.offsetLeft + 30}
+            />
+          </div>
 
-                dispatch({
-                  type: SELECT_USER,
-                  payload: { id: userId, profile: { ...userDoc.data() } },
-                });
-              } catch (error) {
-                console.log("Error changing user", error);
-              }
-            }}
-          >
-            <option>Select User</option>
-            {_users.map((user, i) => {
-              return (
-                <option selected={user.id === xUserId} key={i} value={user.id}>
-                  {user.id}
-                </option>
-              );
-            })}
-          </select>
-        )}
+          {_screenType === SCREEN_TYPE.MOBILE && <HorizontalBottomMenu />}
 
-        {inDev && (
-          <select onChange={(e) => router.push(`/${e.target.value}`)}>
-            <option>Change City</option>
-            {Object.keys(cities).map((city, i) => {
-              return (
-                <option selected={xCity.key === city} key={i} value={city}>
-                  {cities[`${city}`].label}
-                </option>
-              );
-            })}
-          </select>
-        )}
+          <div className={"headerNav"}>
+            <div className={"topBar"}></div>
 
-        <button onClick={() => setTopRightMenu(true)}>
-          {profile?.displayName || "Log In"}
-        </button>
-      </div>
-      )
-      <div className="body">
-        {_screenType !== SCREEN_TYPE.MOBILE && <aside>ASIDE</aside>}
+            <StoryMenu
+              onBrainClick={() => setTopRightMenu(true)}
+              setRef={settingsRef}
+              mobile={_screenType === SCREEN_TYPE.MOBILE}
+            />
 
-        <main>
-          {xLoading && xLoadingMessage && <Loader message={xLoadingMessage} />}
-          {renderModal()}
-          {children}
-        </main>
+            <style jsx>{`
 
-        {_screenType !== SCREEN_TYPE.MOBILE && <aside>ASIDE</aside>}
-      </div>
-      <div className={styles.spacedRow}>
-        <span>Footer</span>
-        <span>Footer</span>
-        <span>Footer</span>
-      </div>
-      <style jsx>
-        {`
-          .body {
-            display: flex;
-            height: 100%;
-            width: 100%;
-          }
-          main {
-            width: ${_screenType === SCREEN_TYPE.MOBILE ? "100%" : `400px`};
-            height: 100%;
+        .topBar{
+          display:flex;
+          width: 100%;
+          background-color:green;
+        }
 
-            display: flex;
+    
+          .headerNav {
+            position: sticky;
             flex-direction: column;
-            align-items: center;
-            overflow-y: auto;
-            position: relative;
+            margin-top: -50px;
+            display: flex;
+            flex-grow: 1;
+            justify-content: space-between;
+            top: 0px;
+            background-color: green;
+            padding: 3px;
+            z-index: 10;
           }
 
-          aside {
-            flex-grow: 1;
+       
           }
-        `}
-      </style>
+        `}</style>
+          </div>
+          <div className={styles.topContainer}>
+            {_showUserProfile && (
+              <div className={styles.bottomRightCard}>
+                <span>{xUserId || "No Id"}</span>
+                {Object.keys(xProfile).map((key, i) => {
+                  return <span key={i}>{`${key}:${xProfile[`${key}`]}`}</span>;
+                })}
+              </div>
+            )}{" "}
+            {_screenType !== SCREEN_TYPE.MOBILE && (
+              <aside>
+                {/* <div className={styles.stickyCard}></div> */}
+                <div className={styles.stickyAsideContainer}>
+                  <VerticalMenu
+                    onBrainClick={() => setTopRightMenu(true)}
+                    setRef={settingsRef}
+                  />
+                </div>
+              </aside>
+            )}
+            <div className="main">
+              {xLoading && xLoadingMessage && (
+                <Loader message={xLoadingMessage} />
+              )}
+
+              {children}
+            </div>
+            {_screenType !== SCREEN_TYPE.MOBILE && (
+              <aside>
+                {" "}
+                <div className={styles.stickyAsideContainer}>
+                  <Fridge cityKey={xCity.key} />
+                </div>
+              </aside>
+            )}
+            {/* <div className={styles.spacedRow}>
+        <span>Footer</span>
+        <span>Footer</span>
+        <span>Footer</span>
+      </div> */}
+            <style jsx>
+              {`
+                .body {
+                  display: flex;
+                  height: 100%;
+                  width: 100%;
+                }
+                .main {
+                  width: ${_screenType === SCREEN_TYPE.MOBILE
+                    ? "100%"
+                    : `400px`};
+                  height: 100%;
+
+                  display: flex;
+                  flex-direction: column;
+                  align-items: center;
+                  overflow-y: auto;
+                  overflow-x: hidden;
+                  position: relative;
+                }
+
+                aside {
+                  flex-grow: 1;
+                  position: sticky;
+                  background-color: white;
+                  top: 50px;
+                }
+              `}
+            </style>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

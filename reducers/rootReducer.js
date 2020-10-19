@@ -8,6 +8,7 @@ import { asyncReducer } from "./asyncReducer";
 import { userReducer } from "./userReducer";
 import { templateReducer } from "./templateReducer";
 import { firestoreReducer, firebaseReducer } from "react-redux-firebase";
+import { categoryReducer } from "./categoryReducer";
 
 //import { scrollItemReducer } from "./scrollItemReducer";
 //import { avatarMatchReducer } from "./avatarMatchReducer";
@@ -23,6 +24,7 @@ const rootReducer = combineReducers({
   async: asyncReducer,
   user: userReducer,
   template: templateReducer,
+  category: categoryReducer,
 });
 
 export default rootReducer;

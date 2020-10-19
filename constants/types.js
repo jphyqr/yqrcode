@@ -17,6 +17,14 @@ export const fields = {
   },
 };
 
+export const categories = [
+  { label: "Services", key: "SERVICES", emojie: "🔨" },
+  { label: "Food", key: "FOOD", emojie: "🍕" },
+  { label: "Social", key: "SOCIAL", emojie: "😊" },
+  { label: "Shopping", key: "SHOPPING", emojie: "🛒" },
+  { label: "Growth", key: "GROWTH", emojie: "🧠" },
+];
+
 export const cities = {
   REGINA: {
     label: "Regina, SK",
@@ -32,10 +40,11 @@ export const cities = {
   },
 };
 
-export const services = {
-  Drains: {
+export const services = [
+  {
     emoji: "🚽",
     label: "Drains",
+    category: "SERVICES",
     products: [
       {
         label: "Camera Spec",
@@ -52,75 +61,79 @@ export const services = {
     ],
     fields: [fields.ONSITE_QUOTE_TIME],
   },
-  RENOVATIONS: {
+  {
     emoji: "🔨",
     label: "Renos",
+    category: "SERVICES",
   },
-  GROCERY_DELIVERY: {
+  {
     emoji: "🛒",
     label: "Groceries",
+    category: "SHOPPING",
   },
-  EYES: {
+  {
     emoji: "👀",
     label: "Eyes",
+    category: "SERVICES",
   },
-  FITNESS: {
+  {
     emoji: "🦷",
     label: "Dentist",
+    category: "SERVICES",
   },
-  DONATE_BLOOD: {
-    emoji: "🩸",
-    label: "Donate Blood",
-  },
-  FITNESS: {
-    emoji: "💪",
-    label: "Fitness",
-  },
-  SUNGLASSES: {
-    emoji: "👓 ",
-    label: "Sunglasses",
-  },
-  MAKEUP: {
+
+  { emoji: "🩸", label: "Donate Blood", category: "SERVICES" },
+
+  { emoji: "💪", category: "GROWTH", label: "Fitness" },
+
+  { emoji: "👓 ", category: "SHOPPING", label: "Sunglasses" },
+  {
     emoji: "💄",
+    category: "SERVICES",
     label: "Makeup",
   },
-  NAILS: {
+  {
     emoji: "💅",
+    category: "SERVICES",
     label: "Nails",
   },
-  JEWLER: {
+  {
     emoji: "💍 ",
+    category: "SHOPPING",
     label: "JEWLER",
   },
-  SUNGLASSES: {
+  {
     emoji: "👓 ",
+    category: "SHOPPING",
     label: "Sunglasses",
   },
-  SUNGLASSES: {
-    emoji: " ",
-    label: "Sunglasses",
-  },
-  MENTAL_HEALTH: {
+
+  {
     emoji: "😊",
+    category: "GROWTH",
     label: "Mental Health",
   },
-  TAXES: {
+  {
     emoji: "💰",
+    category: "SERVICES",
     label: "Tax Return",
   },
-  INVESTMENTS: {
+  {
     emoji: "📈",
+    category: "GROWTH",
     label: "Retire Wealthy",
   },
-  BABY_SITTER: {
+  {
     emoji: "👶",
+    category: "SERVICES",
     label: "Sitter",
   },
-  CLEANER: {
+  {
     emoji: "🧹",
+    category: "SERVICES",
     label: "Cleaner",
   },
-};
+];
 
 export const templates = {
   FRIDGE: {

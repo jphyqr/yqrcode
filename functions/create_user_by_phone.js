@@ -35,7 +35,7 @@ module.exports = function (req, res) {
           phoneNumber: phone,
           displayName:
             phone.substr(2, 3) + "****" + phone.substr(9, phone.length),
-
+          photoURL: "/user.png",
           disabled: false,
         });
 
@@ -44,7 +44,10 @@ module.exports = function (req, res) {
           PhoneNumber: true,
           displayName:
             phone.substr(2, 3) + "****" + phone.substr(9, phone.length),
-
+          DisplayNameSet: false,
+          PasswordSet: false,
+          PhotoURLSet: false,
+          photoURL: "/user.png",
           createdAt: Date.now(),
         };
 
