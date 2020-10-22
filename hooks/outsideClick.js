@@ -42,4 +42,3 @@ const useScreenWidth = () => {
 };
 
 export { useOutsideClick, useScreenWidth };
-rsf;
