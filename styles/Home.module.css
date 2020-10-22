@@ -1,17 +1,21 @@
 .modal {
   opacity: 0;
   animation: modalAppear 0.5s forwards;
+  height: 100vh;
 }
 
 .stickyContainer {
   width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 
 .modalContainer {
   position: relative;
 
   width: 100%;
-  height: 100%;
+  min-height: 100vh;
 }
 
 .topContainer {
@@ -31,7 +35,7 @@
 
 .overlayContainer {
   position: relative;
-  height: 100%;
+  height: 100vh;
   width: 100%;
   overflow-y: hidden;
 }
@@ -159,6 +163,11 @@
   width: 100%; */
 }
 
+.horizontalSlider {
+  display: flex;
+  justify-content: space-evenly;
+}
+
 .spacedPage {
   height: 100%;
   background-color: green;
@@ -173,13 +182,14 @@
   position: absolute;
   top: 50%;
   left: 50%;
+
   transform: translate(-50%, -50%);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   border-radius: 10;
-  padding: 20px;
+  padding: 10px;
 
   background-color: white;
 }
@@ -251,7 +261,8 @@
 
 .feedCard {
   height: 100px;
-  width: 100%;
+  width: 75px;
+  margin-right: 10px;
   border-radius: 10px;
   flex-grow: 1;
   background-color: lightgoldenrodyellow;
@@ -263,11 +274,20 @@
   position: relative;
 }
 
-.feedCard:last-child {
-  margin-bottom: 100px;
+.isScrollLocked {
+  overflow: hidden;
 }
-.feedCard:first-child {
-  margin-top: 10px;
+
+.isScrollLocked {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.isMomentumScrollable {
+  -webkit-overflow-scrolling: touch;
 }
 
 .feedCard:hover {
@@ -294,9 +314,11 @@
 }
 
 .feed {
-  width: 90%;
+  width: 100%;
+  justify-content: space-around;
+  align-items: center;
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
 }
 
 .container {
@@ -310,7 +332,7 @@
 
 .dimmerContainer {
   position: relative;
-  height: 100%;
+  height: 100vh;
   width: 100%;
 }
 

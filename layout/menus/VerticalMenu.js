@@ -11,7 +11,6 @@ const VerticalMenu = ({ onBrainClick, setRef, selectedTab, selectTab }) => {
     <div className={"side-nav"}>
       <div className={"top"}>
         {categories.map((categorie, i) => {
-          console.log({ categorie });
           return (
             <div
               onClick={() =>

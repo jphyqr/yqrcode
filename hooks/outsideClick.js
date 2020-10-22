@@ -23,4 +23,23 @@ const useOutsideClick = (node, onOutsideClick) => {
   return;
 };
 
-export { useOutsideClick };
+const useScreenWidth = () => {
+  const [width, setWidth] = useState(0);
+  const updateWidthAndHeight = () => {
+    setWidth(window.innerWidth);
+  };
+
+  useEffect(() => {
+    setWidth(window.innerWidth);
+  }, []);
+
+  useEffect(() => {
+    window.addEventListener("resize", updateWidthAndHeight);
+    return () => window.removeEventListener("resize", updateWidthAndHeight);
+  }, [width]);
+
+  return [width];
+};
+
+export { useOutsideClick, useScreenWidth };
+rsf;

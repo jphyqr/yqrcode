@@ -12,7 +12,6 @@ const StoryMenu = ({ mobile, setTopRightMenu, setRef, onBrainClick }) => {
       {mobile && <Brain mobile setRef={setRef} onClick={onBrainClick} />}
 
       {categories.map((categorie, i) => {
-        console.log({ categorie });
         return (
           <div
             onClick={() => selectTab(categorie.key)}

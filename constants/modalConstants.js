@@ -2,12 +2,14 @@ import RegisterModal from "../modals/RegisterModal";
 import PhoneNumber from "../modals/PhoneNumber";
 import DisplayName from "../modals/DisplayName";
 import BusinessManager from "../modals/BusinessManager";
+import Products from "../modals/Products";
 
 const stockModals = {
   PhoneNumberModal: "PhoneNumber",
 
   CreateGroup: "CreateGroup",
   BusinessManager: "BusinessManager",
+  Products: "Products",
 };
 
 export const verificationMap = {
@@ -29,5 +31,7 @@ modalComps[modalTypes.PhoneNumberModal] = PhoneNumber;
 
 modalComps[modalTypes.DisplayNameSet] = DisplayName;
 modalComps[modalTypes.BusinessManager] = BusinessManager;
+
+modalComps[modalTypes.Products] = Products;
 
 export const modalComponents = Object.assign({}, modalComps);
