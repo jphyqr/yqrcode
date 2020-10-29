@@ -100,57 +100,51 @@ const PhoneNumber = () => {
 
   return (
     <ModalWrapper>
-      <div className={styles.modal}>
-        <div className={styles.dimmerContainer}>
-          <div className={styles.dimmer} />
-
-          {_authenticating ? (
-            <div className={styles.overlay}>
-              <div className={styles.spinner} />
-              <span>{`Authenticating...`}</span>
-            </div>
-          ) : _loading ? (
-            <div className={styles.overlay}>
-              <div className={styles.spinner} />
-              <span>{`Sending Code to ${_phone}`}</span>
-            </div>
-          ) : _codeSent ? (
-            <div className={styles.overlay}>
-              <span>Enter code sent to phone</span>
-              <input
-                placeholder="1234"
-                required
-                maxLength={4}
-                value={_code}
-                onChange={(p) => updateCode(p.target.value)}
-              />
-              {_error && <span>{_errorText}</span>}
-
-              <button onClick={handleSubmit}>Resend Code</button>
-            </div>
-          ) : (
-            <div className={styles.overlay}>
-              <span>Authenticate with Phone Number</span>
-              <input
-                type="phone"
-                placeholder="3069999999"
-                required
-                maxLength={10}
-                value={_phone}
-                onChange={(p) => updateIfMatchesPhonePattern(p.target.value)}
-              />
-              <button onClick={handleSubmit}>Send Code</button>
-              <button
-                onClick={() => {
-                  Router.push("/");
-                }}
-              >
-                Exit
-              </button>
-            </div>
-          )}
+      {_authenticating ? (
+        <div className={styles.overlay}>
+          <div className={styles.spinner} />
+          <span>{`Authenticating...`}</span>
         </div>
-      </div>
+      ) : _loading ? (
+        <div className={styles.overlay}>
+          <div className={styles.spinner} />
+          <span>{`Sending Code to ${_phone}`}</span>
+        </div>
+      ) : _codeSent ? (
+        <div className={styles.overlay}>
+          <span>Enter code sent to phone</span>
+          <input
+            placeholder="1234"
+            required
+            maxLength={4}
+            value={_code}
+            onChange={(p) => updateCode(p.target.value)}
+          />
+          {_error && <span>{_errorText}</span>}
+
+          <button onClick={handleSubmit}>Resend Code</button>
+        </div>
+      ) : (
+        <div className={styles.overlay}>
+          <span>cate with Phone Number</span>
+          <input
+            type="phone"
+            placeholder="3069999999"
+            required
+            maxLength={10}
+            value={_phone}
+            onChange={(p) => updateIfMatchesPhonePattern(p.target.value)}
+          />
+          <button onClick={handleSubmit}>Send Code</button>
+          <button
+            onClick={() => {
+              Router.push("/");
+            }}
+          >
+            Exit
+          </button>
+        </div>
+      )}
     </ModalWrapper>
   );
 };
