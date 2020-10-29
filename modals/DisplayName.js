@@ -38,32 +38,26 @@ const DisplayName = () => {
 
   return (
     <ModalWrapper>
-      <div className={styles.modal}>
-        <div className={styles.dimmerContainer}>
-          <div className={styles.dimmer} />
-
-          {_loading ? (
-            <div className={styles.overlay}>
-              <div className={styles.spinner} />
-              <span>{`Updating Name...}`}</span>
-            </div>
-          ) : (
-            <div className={styles.overlay}>
-              <span>Enter Display Name</span>
-              <input
-                placeholder="Bruce Wayne"
-                required
-                maxLength={10}
-                value={_name}
-                onChange={(p) => setName(p.target.value)}
-              />
-              {_error && <span>{_errorText}</span>}
-
-              <button onClick={handleSubmit}>Update Name</button>
-            </div>
-          )}
+      {_loading ? (
+        <div className={styles.overlay}>
+          <div className={styles.spinner} />
+          <span>{`Updating Name...}`}</span>
         </div>
-      </div>
+      ) : (
+        <div className={styles.overlay}>
+          <span>Enter Display Name</span>
+          <input
+            placeholder="Bruce Wayne"
+            required
+            maxLength={10}
+            value={_name}
+            onChange={(p) => setName(p.target.value)}
+          />
+          {_error && <span>{_errorText}</span>}
+
+          <button onClick={handleSubmit}>Update Name</button>
+        </div>
+      )}
     </ModalWrapper>
   );
 };

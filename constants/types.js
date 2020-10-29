@@ -17,6 +17,41 @@ export const fields = {
   },
 };
 
+export const FOOD_STORIES = [
+  {
+    key: "HOT_AND_READY",
+    label: "Hot and Ready",
+  },
+  {
+    key: "MAKE_FROM_HOME",
+    label: "Make From Home",
+  },
+  {
+    key: "HOW_TO_COOK",
+    label: "How To Cook",
+  },
+  {
+    key: "DESERTS",
+    label: "Deserts",
+  },
+  {
+    key: "NIGERIAN",
+    label: "Nigerian",
+  },
+  {
+    key: "EAST_INDIAN",
+    label: "East Indian",
+  },
+  {
+    key: "GREEK",
+    label: "Greek",
+  },
+  {
+    key: "LEBANESE",
+    label: "Lebanese",
+  },
+];
+
 export const categories = [
   { label: "Services", key: "SERVICES", emojie: "🔨" },
   { label: "Food", key: "FOOD", emojie: "🍕" },
@@ -41,6 +76,43 @@ export const cities = {
 };
 
 export const services = [
+  {
+    label: "Home Cooking",
+    category: "FOOD",
+    products: [
+      {
+        label: "Nigerian",
+        emoji: "📷",
+        duration: 60,
+        averageCost: 20,
+      },
+      {
+        label: "East Indian",
+        emoji: "📷",
+        duration: 60,
+        averageCost: 20,
+      },
+      {
+        label: "Greek",
+        emoji: "📷",
+        duration: 60,
+        averageCost: 20,
+      },
+      {
+        label: "Lebanese",
+        emoji: "📷",
+        duration: 60,
+        averageCost: 20,
+      },
+      {
+        label: "French",
+        emoji: "📷",
+        duration: 60,
+        averageCost: 20,
+      },
+    ],
+  },
+
   {
     emoji: "🚽",
     label: "Drains",
@@ -150,7 +222,7 @@ export const services = [
         averageCost: 250,
       },
       {
-        label: "17",
+        label: "Water Line Leak",
         emoji: "💧",
         duration: 120,
         averageCost: 300,

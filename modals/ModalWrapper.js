@@ -11,7 +11,7 @@ const ModalWrapper = ({ children }) => {
   const product = useSelector((state) => state.productInfo.product || {});
 
   return (
-    <div className="dimmer-stacker">
+    <div className={styles.dimmerStacker}>
       <div className={styles.dimmer} />
 
       <div className="content" ref={node}>
@@ -22,11 +22,9 @@ const ModalWrapper = ({ children }) => {
         .content {
           position: absolute;
 
-          top: ${_.isEmpty(product) ? "50%" : "10%"};
-          -webkit-transition: transform 200ms;
-          -webkit-transition: -webkit-transform 200ms
+          top: 50%;
+          width: 100%;
           transition: 0.4s linear;
-          left: 50%;
         }
 
         @keyframes push-up {
@@ -36,15 +34,6 @@ const ModalWrapper = ({ children }) => {
           100% {
             transform: translateY(200px);
           }
-        }
-        .dimmer-stacker {
-          width: 100vw;
-          position: relative;
-          left: 0;
-          top: 0;
-          height: 100vh;
-
-          z-index: 10;
         }
       `}</style>
     </div>

@@ -1,7 +1,17 @@
 import React, { useEffect, useRef, useState } from "react";
 import Page from "./Page";
 
-const Slider = ({ items, sliderWidth, itemWidth, gutter }) => {
+const Slider = ({
+  labelKey,
+  itemHeight,
+  sliderLabel,
+
+  items,
+  sliderWidth,
+  itemWidth,
+  gutter,
+  ...otherProps
+}) => {
   const [_page, changePage] = useState(0);
 
   const [_middleItems, setMiddleItems] = useState([]);
@@ -46,7 +56,7 @@ const Slider = ({ items, sliderWidth, itemWidth, gutter }) => {
   useEffect(() => {
     loadArrays();
     f(_f + 1);
-  }, [sliderWidth]);
+  }, [sliderWidth, items]);
 
   useEffect(() => {
     loadArrays();
@@ -71,12 +81,16 @@ const Slider = ({ items, sliderWidth, itemWidth, gutter }) => {
         {_middleItems.map((page, i) => {
           return (
             <Page
+              labelKey={labelKey}
               sliderWidth={sliderWidth}
+              itemHeight={itemHeight}
+              itemWidth={itemWidth}
               gutter={gutter}
               page={page}
               activePageIndex={_page}
               key={i}
               i={i}
+              {...otherProps}
             />
           );
         })}
@@ -106,7 +120,7 @@ const Slider = ({ items, sliderWidth, itemWidth, gutter }) => {
           .button {
             min-width: 50px;
             width: 50px;
-            height: 100px;
+            height: ${itemHeight}px;
             background-color: grey;
             color: white;
             opacity: 0.7;
@@ -133,7 +147,7 @@ const Slider = ({ items, sliderWidth, itemWidth, gutter }) => {
             display: flex;
 
             width: ${sliderWidth}px;
-            height: ${100}px;
+            height: ${itemHeight}px;
             background-color: "lightgrey";
             position: "relative";
           }

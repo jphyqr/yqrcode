@@ -9,11 +9,13 @@ import { userReducer } from "./userReducer";
 import { templateReducer } from "./templateReducer";
 import { firestoreReducer, firebaseReducer } from "react-redux-firebase";
 import { categoryReducer } from "./categoryReducer";
+import { snapReducer } from "./snapReducer";
 
 //import { scrollItemReducer } from "./scrollItemReducer";
 //import { avatarMatchReducer } from "./avatarMatchReducer";
 
 const rootReducer = combineReducers({
+  snap: snapReducer,
   productInfo: productInfoReducer,
   service: serviceReducer,
   city: cityReducer,

@@ -19,3 +19,23 @@ export const SELECT_USER_ID = "SELECT_USER_ID";
 
 export const SET_TEMPLATE = "SET_TEMPLATE";
 export const SET_CATEGORY = "SET_CATEGORY";
+
+export const CREATE_SNAP = "CREATE_SNAP";
+export const CLOSE_SNAP = "CLOSE_SNAP";
+export const PREVIEW_SNAP = "PREVIEW_SNAP";
+export const CLOSE_PREVIEW = "CLOSE_PREVIEW";
+export const VIEW_FILE = "VIEW_FILE";
+export const CLOSE_FILE = "CLOSE_FILE";
+export const SELECT_SNAP = "SELECT_SNAP";
+export const SET_THUMBNAIL = "SET_THUMBNAIL";
+export const UPDATE_SNAP = "UPDATE_SNAP";
+export const EDIT_NUTRITION = "EDIT_NUTRITION";
+export const CLOSE_NUTRITION = "CLOSE_NUTRITION";
+export const EDIT_STORE = "EDIT_STORE";
+export const CLOSE_STORE = "CLOSE_STORE";
+export const OPEN_SHARE_SNAP = "OPEN_SHARE_SNAP";
+export const CLOSE_SHARE_SNAP = "CLOSE_SHARE_SNAP";
+
+export const VIEW_CATEGORY = "VIEW_CATEGORY";
+export const CLOSE_VIEW_CATEGORY = "CLOSE_VIEW_CATEGORY";
+export const VIEW_NEXT_SNAP = "VIEW_NEXT_SNAP";

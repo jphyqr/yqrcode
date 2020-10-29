@@ -9,6 +9,10 @@ import {
   SELECT_USER_ID,
   SET_MODAL,
   SET_CITY,
+  CLOSE_NUTRITION,
+  CLOSE_STORE,
+  CLOSE_SHARE_SNAP,
+  CLOSE_VIEW_CATEGORY,
 } from "../reducers/reducerConstants";
 import { SCREEN_WIDTH_MIN, SCREEN_TYPE } from "../constants/helperConstants";
 import _ from "lodash";
@@ -29,6 +33,13 @@ import VerticalSpacer from "../components/spacers/VerticalSpacer";
 import NestedDiv from "./LockedDiv";
 import { ScrollableProvider } from "./ScrollableProvider";
 import LockedDiv from "./LockedDiv";
+import CreateSnap from "../components/Snap/CreateSnap/CreateSnap";
+import PreviewSnap from "../components/Snap/PreviewSnap/PreviewSnap";
+import ViewFile from "../components/Snap/ViewFile/ViewFile";
+import EditNutrition from "../components/Snap/CreateSnap/EditNutrition";
+import EditStore from "../components/Snap/CreateSnap/EditStore";
+import ShareSnap from "../components/Snap/CreateSnap/ShareSnap";
+import ViewCategory from "../components/Snap/ViewCategory/ViewCategory";
 const ResponsiveLayout = ({ children, bypassAuth }) => {
   const [_f, f] = useState(1);
   const [_users, setUsers] = useState([]);
@@ -55,6 +66,7 @@ const ResponsiveLayout = ({ children, bypassAuth }) => {
   const xLoadingMessage = useSelector((state) => state.async.message || "");
   const inDev = process.env.NODE_ENV === "development" ? true : false;
   const [_topRightMenu, setTopRightMenu] = useState(false);
+  const showProduct = useSelector((state) => state.productInfo.show || false);
 
   const settingsRef = useRef(null);
   if (typeof window !== "undefined") {
@@ -204,6 +216,48 @@ const ResponsiveLayout = ({ children, bypassAuth }) => {
       <div className={styles.modalContainer}>
         {renderModal()}
 
+        {xLoading && xLoadingMessage && (
+          <div className={styles.globalLoader}>
+            <Loader message={xLoadingMessage} />
+          </div>
+        )}
+
+        {auth.isLoaded && !auth.isEmpty && <CreateSnap />}
+
+        {auth.isLoaded && !auth.isEmpty && <ViewFile />}
+
+        {auth.isLoaded && !auth.isEmpty && <PreviewSnap />}
+        {auth.isLoaded && !auth.isEmpty && (
+          <EditNutrition exit={() => dispatch({ type: CLOSE_NUTRITION })} />
+        )}
+
+        {auth.isLoaded && !auth.isEmpty && (
+          <EditStore exit={() => dispatch({ type: CLOSE_STORE })} />
+        )}
+
+        {auth.isLoaded && !auth.isEmpty && (
+          <ShareSnap exit={() => dispatch({ type: CLOSE_SHARE_SNAP })} />
+        )}
+
+        {auth.isLoaded && !auth.isEmpty && (
+          <ViewCategory exit={() => dispatch({ type: CLOSE_VIEW_CATEGORY })} />
+        )}
+
+        <div className={"product-info"}>
+          <style jsx>{`
+            .product-info {
+              height: 400px;
+              width: 100%;
+              background-color: white;
+              position: absolute;
+              bottom: ${showProduct ? "100px" : "-400px"};
+              left: 0;
+              transition: 0.5s ease;
+              z-index: 12;
+            }
+          `}</style>
+        </div>
+
         <div className={styles.stickyContainer}>
           {_topRightMenu && _screenType === SCREEN_TYPE.MOBILE && (
             <div className={"top-left-drawer-menu"}>
@@ -330,9 +384,6 @@ const ResponsiveLayout = ({ children, bypassAuth }) => {
             <div className="main" onScroll={() => console.log("SCROLLING")}>
               {_screenType !== SCREEN_TYPE.MOBILE && (
                 <VerticalSpacer height={50} />
-              )}
-              {xLoading && xLoadingMessage && (
-                <Loader message={xLoadingMessage} />
               )}
 
               {children}

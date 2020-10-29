@@ -4,6 +4,67 @@
   height: 100vh;
 }
 
+.previewFrame {
+  height: 100%;
+  width: 100%;
+}
+
+.previewSnap {
+  z-index: 20;
+  background-color: black;
+  width: 100%;
+}
+
+.header,
+.footer {
+  width: 100%;
+  margin-bottom: 15px;
+  padding: 5px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.footer {
+}
+.closeButton {
+  cursor: pointer;
+  border: 1px solid white;
+  border-radius: 10px;
+  padding: 5px 10px 5px 10px;
+  font-size: 36px;
+  color: white;
+}
+
+.dimmerStacker {
+  width: 100%;
+  position: relative;
+  left: 0;
+  top: 0;
+  height: 100vh;
+
+  z-index: 10;
+  animation: modalAppear 0.5s forwards;
+}
+
+@keyframes slideUp {
+  0% {
+    transform: translate(-50%, 100%);
+  }
+  100% {
+    transform: translateY(-50%, -50%);
+  }
+}
+
+@keyframes modalAppear {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
 .stickyContainer {
   width: 100%;
   position: absolute;
@@ -33,6 +94,27 @@
   }
 }
 
+.wrappedRow {
+  width: 100vw;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.timeline {
+  width: 300px;
+  display: flex;
+
+  background-color: gainsboro;
+}
+
+.globalLoader {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  z-index: 50;
+}
 .overlayContainer {
   position: relative;
   height: 100vh;
