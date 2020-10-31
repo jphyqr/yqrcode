@@ -120,11 +120,11 @@ const ViewCategory = ({ exit }) => {
       >
         Buy!
       </span>
-      <div className={"profile-video"}>
+      {/* <div className={"profile-video"}>
         <video id="profile-video" width="100" height="100" autoPlay>
           <source src={activeSnapToView.profileURL} type={"video/mp4"}></source>
         </video>
-      </div>
+      </div> */}
 
       <span
         className={"cta nutrition"}
@@ -152,6 +152,8 @@ const ViewCategory = ({ exit }) => {
               width="100"
               height="100"
               autoPlay
+              playsInline
+              loop
             >
               <source src={_activeSnap.url} type={"video/mp4"}></source>
             </video>
